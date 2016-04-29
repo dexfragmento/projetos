@@ -1,0 +1,202 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h3 class="page-header">
+			<i class="icon_id 2_alt"></i> <strong>Cadastro de Funcionários</strong>
+		</h3>
+		<ol class="breadcrumb">
+			<li><i class="fa fa-home"></i><a href="#/dashboard">Home</a></li>
+			<li><i class="icon_floppy"></i>Cadastros</li>
+			<li><i class="icon_id 2_alt"></i>Funcionários</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-7">
+		<section class="panel">
+			<header class="panel-heading"> Cadastro de Funcionários </header>
+			<div class="panel-body">
+
+				<form name="cadastroFuncionarioForm" role="form" class="form-validate form-horizontal" ng-submit="salvar()">
+					<div class="form-group">	
+						<div class="col-sm-6">
+						    <label class="control-label" for="nome"><strong>Nome<span class="required">*</span></strong></label>
+							<input id="nome" 
+								   type="text" 
+								   class="form-control" 
+								   placeholder="Digite o nome completo do funcionário"
+								   ng-model="dto.nome"
+								   required>
+						</div>            
+                        <div class="col-sm-3">
+                            <label class="control-label" for="rg"><strong>RG<span class="required">*</span></strong></label>
+                            <input id="rg" 
+                                   type="text" 
+                                   class="form-control" 
+                                   placeholder="Digite o RG" 
+                                   ng-model="dto.rg"
+                                   somente-numero
+                                   required>
+                        </div>                
+                        <div class="col-sm-3">
+                            <label class="control-label" for="cpf"><strong>CPF<span class="required">*</span></strong></label>
+                            <input id="cpf" 
+                                   type="text" 
+                                   class="form-control" 
+                                   placeholder="Digite o CPF" 
+                                   ng-model="dto.cpf"
+                                   mascara-cpf
+                                   required>
+                        </div>                  
+					</div>
+					
+					<div class="form-group">												
+						<div class="col-sm-4">
+						    <label class="control-label" for="pis"><strong>PIS<span class="required">*</span></strong></label>
+							<input id="pis" 
+								   type="text" 
+								   class="form-control" 
+								   placeholder="Digite o PIS" 
+								   ng-model="dto.pis"
+								   somente-numero
+								   required>
+						</div>						                        
+                        <div class="col-sm-4"> 
+                            <label class="control-label" for="tituloEleitor"><strong>Título de Eleitor<span class="required">*</span></strong></label>
+                            <input id="tituloEleitor" 
+                                   type="text" 
+                                   class="form-control" 
+                                   placeholder="Digite o Título de Eleitor"
+                                   ng-model="dto.tituloEleitor"
+                                   somente-numero
+                                   required>
+                        </div>                        
+                        <div class="col-sm-4">
+                            <label class="control-label" for="telefone"><strong>Telefone</strong></label>
+                            <input id="telefone" 
+                                   type="text" 
+                                   class="form-control"
+                                   ng-model="dto.telefone" 
+                                   placeholder="Digite o telefone (xx) xxxxxxxx"
+                                   mascara-telefone>  
+                        </div>				
+					</div>
+					
+					<div class="form-group">						
+						<div class="col-sm-5">
+						    <label class="control-label" for="email"><strong>E-mail</strong></label>					
+							<input id="email" 
+								   type="email" 
+								   class="form-control"
+								   ng-model="dto.email" 
+								   placeholder="Digite o e-mail">
+						</div>
+						                      
+                        <div class="col-sm-7">
+                            <label class="control-label" for="endereco"><strong>Endereço<span class="required">*</span></strong></label>
+                            <input id="endereco" 
+                                   type="text" 
+                                   class="form-control" 
+                                   placeholder="Digite o endereço"
+                                   ng-model="dto.endereco" 
+                                   required>
+                        </div>					
+					</div>
+					
+					<div class="form-group">
+					    <div class="col-sm-6">
+                            <label class="control-label" for="cargo"><strong>Cargo / Função<span class="required">*</span></strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon" style="cursor: pointer;" data-toggle="modal" data-target="#cadastroCargo" data-backdrop="true" ng-click="configurarCadastroCargo('cadastroCargo')">
+                                    <i class="fa fa-plus"></i>
+                                </span>
+	                            <select id="cargo" class="form-control" ng-model="dto.cargo" ng-options="cargo.nome for cargo in listaCargos" ng-change="selecionarCargoSalarioFixo()" required>
+	                                <option value="" ng-disabled>Selecione o cargo / Função</option>
+	                            </select>
+	                        </div>
+                        </div>
+						<div class="col-sm-6">
+						    <label class="control-label" for="salario"><strong>Salário R$<span class="required">*</span></strong></label>
+							<input id="salario" 
+								   type="text" 
+								   class="form-control" 
+								   placeholder="Digite o salário R$ 0,00"
+								   ng-model="dto.salario"
+								   mascara-moeda
+								   step="0.01"
+								   required>
+						</div>
+					</div>
+					<div class="form-group">						
+						<div class="col-sm-6">
+                            <label class="control-label" for="dataAdmissao"><strong>Data de Admissão<span class="required">*</span></strong></label>
+                            <input id="dataAdmissao"
+                                   type="text" 
+                                   class="form-control" 
+                                   placeholder="Digite a data de admissão"
+                                   ng-model="dto.dataAdmissao"
+                                   mascara-data
+                                   required>
+                        </div>
+						<div class="col-sm-6">
+                            <label class="control-label" for="locacao"><strong>Locação<span class="required">*</span></strong></label>
+                            <div class="input-group">
+                                <span class="input-group-addon" style="cursor: pointer;" data-toggle="modal" data-target="#cadastroLocacao" data-backdrop="true" ng-click="configurarCadastroLocacao('cadastroLocacao')"><i class="fa fa-plus"></i></span>
+	                            <select id="locacao" class="form-control" ng-model="dto.locacao" ng-options="locacao.nome for locacao in listaLocacoes" required>
+	                                <option value="" ng-disabled>Selecione a locação</option>
+	                            </select>
+	                        </div>
+                        </div>
+					</div>
+
+					<div class="form-group pull-right">
+						<div class="col-sm-12">                      
+		                    <button class="btn btn-primary" 
+		                    		type="submit"
+		                    		ng-disabled="!cadastroFuncionarioForm.$valid"><i class="fa fa-plus-square"></i>&nbsp;Salvar</button>
+		                    <button class="btn btn-default" 
+		                    		type="button"
+		                    		ng-click="limpar()"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
+		                    <a href="#/dashboard" class="btn btn-danger" type="button"><i class="fa fa-minus-square"></i>&nbsp;Cancelar</a>
+		                </div>                       
+                    </div>
+				</form>
+
+			</div>
+		</section>
+	</div>
+
+	<div class="col-lg-5">
+		<section class="panel">
+			<header class="panel-heading"> Acompanhamento dos Funcionários Registrados </header>
+			<div class="panel-body">
+			     <div class="col-sm-12">
+                     <input id="filtroPesquisa" 
+                           type="text" 
+                           class="form-control" 
+                           placeholder="Digite o nome do funcionário que deseja filtrar"
+                           ng-model="filtroPesquisa">
+                </div>
+                <br/><br/>
+				<table class="table table-striped table-advance table-hover">
+                    <tbody>
+                       <tr>
+                          <th><i class="icon_profile"></i> Nome</th>
+                          <th><i class="icon_phone"></i> Telefone</th>
+                       </tr>
+                       <tr ng-repeat="f in listaFuncionarios | filter: filtroPesquisa | orderBy: '+nome'"
+                           data-toggle="modal" data-target="#infoFuncionario" data-backdrop="true"
+                           ng-click="carregarInfoModal(f)">
+			               <td>{{f.nome | uppercase}}</td>
+			               <td>{{f.telefone | telefone}}</td>
+                       </tr>
+                   </tbody>
+               </table>
+			</div>
+		</section>
+	</div>
+</div>
+
+<modal-info id="modalId" titulo="tituloModal" array="infoArray"></modal-info>
+<modal-cadastro-cargo id="idCadastroCargo" lista-cargos="listaCargos"></modal-cadastro-cargo>
+<modal-cadastro-locacao id="idCadastroLocacao" lista-locacoes="listaLocacoes"></modal-cadastro-locacao>

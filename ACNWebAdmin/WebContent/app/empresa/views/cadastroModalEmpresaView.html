@@ -1,0 +1,64 @@
+<div id="{{id}}" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="left: 0;">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					<strong>Cadastrar Empresa</strong>
+				</h4>
+			</div>
+			<div class="modal-body">			
+				<form name="cadastroEmpresaForm" role="form" class="form-validate form-horizontal">
+		            <div class="form-group">                    
+		                <label class="col-sm-2 control-label" for="cnpj"><strong>CNPJ<span class="required">*</span></strong></label>                      
+		                <div class="col-sm-10">
+		                    <input id="cnpj"
+		                           type="text"
+		                           class="form-control"
+		                           placeholder="Digite o CNPJ"
+		                           ng-model="dto.cnpj"
+		                           mascara-cnpj
+		                           required>
+		                </div>                      
+		            </div>
+		            <div class="form-group">                    
+		                <label class="col-sm-2 control-label" for="nome"><strong>Nome<span class="required">*</span></strong></label>                        
+		                <div class="col-sm-10">
+		                    <input id="nome" 
+		                           type="text" 
+		                           class="form-control" 
+		                           placeholder="Digite o nome"
+		                           ng-model="dto.nome"
+		                           required>
+		                </div>         
+		            </div>
+		            <div class="form-group">                    
+		                <label class="col-sm-2 control-label" for="endereco"><strong>Endereço</strong></label>                        
+		                <div class="col-sm-10">
+		                    <input id="endereco" 
+		                           type="text" 
+		                           class="form-control" 
+		                           placeholder="Digite o endereço"
+		                           ng-model="dto.endereco">
+		                </div>                      
+		            </div>
+		        </form>
+			</div>
+			<div class="modal-footer">
+		        <button class="btn btn-primary"
+		                type="button"
+		                ng-disabled="!cadastroEmpresaForm.$valid"
+		                ng-click="salvar()"
+		                data-dismiss="modal"><i class="fa fa-plus-square"></i>&nbsp;Salvar</button>
+		       <button class="btn btn-default"
+		               type="button"
+		               ng-click="limpar()"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>       
+		        <button type="button" 
+		                class="btn btn-default" 
+		                ng-click="limpar()" 
+		                data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Fechar</button>
+		      </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<div id="{{id}}" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="left: 0;">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">
+					<strong>Cadastrar Locação</strong>
+				</h4>
+			</div>
+			<div class="modal-body">			
+				<form name="cadastroLocacaoForm" role="form" class="form-validate form-horizontal">
+	                <div class="form-group">                    
+	                    <label class="col-sm-2 control-label" for="empresa"><strong>Empresa<span class="required">*</span></strong></label>                      
+	                    <div class="col-sm-10">
+	                        <select id="empresa" 
+	                                ng-model="dto.empresa" 
+	                                ng-options="empresa.nome for empresa in listaEmpresas"
+	                                class="form-control"
+	                                required>
+	                            <option value="" ng-disabled>Selecione a empresa</option>
+	                        </select>
+	                    </div>                      
+	                </div>
+	                <div class="form-group">                    
+	                    <label class="col-sm-2 control-label" for="nome"><strong>Nome<span class="required">*</span></strong></label>                        
+	                    <div class="col-sm-10">
+	                        <input id="nome" 
+	                               type="text" 
+	                               class="form-control" 
+	                               placeholder="Digite o nome"
+	                               ng-model="dto.nome"
+	                               required>
+	                    </div>         
+	                </div>
+	            </form>
+			</div>
+			
+			<div class="modal-footer">
+		        <button class="btn btn-primary" 
+		                type="button"
+		                ng-disabled="!cadastroLocacaoForm.$valid"
+		                ng-click="salvar()"
+		                data-dismiss="modal"><i class="fa fa-plus-square"></i>&nbsp;Salvar</button>
+		       <button class="btn btn-default" 
+		               type="button"
+		               ng-click="limpar()"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>       
+		        <button type="button" 
+		                class="btn btn-default" 
+		                ng-click="limpar()" 
+		                data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Fechar</button>
+		      </div>
+		</div>
+		
+	</div>
+</div>
