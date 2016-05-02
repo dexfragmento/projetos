@@ -3,7 +3,7 @@
  */
 app.filter('telefone', function () {
 	return function (input) {
-		if(input !== undefined){
+		if(input !== undefined && input != null){
 			var _getTelefone = function(str) {								
 				return str.replace(regexSomenteNumero, '');
 			};

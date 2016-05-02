@@ -31,6 +31,18 @@
                         </div>                      
                     </div>
                     <div class="form-group">                    
+                        <label class="col-sm-2 control-label" for="cei"><strong>CEI<span class="required">*</span></strong></label>                      
+                        <div class="col-sm-10">
+                            <input id="cei"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Digite o CEI"
+                                   ng-model="dto.cei"
+                                   mascara-cei
+                                   required>
+                        </div>                      
+                    </div>
+                    <div class="form-group">                    
                         <label class="col-sm-2 control-label" for="nome"><strong>Nome<span class="required">*</span></strong></label>                        
                         <div class="col-sm-10">
                             <input id="nome" 
@@ -85,11 +97,13 @@
                        <tr>
                           <th><i class="fa fa-building-o"></i> Nome</th>
                           <th><i class="icon_id"></i> CNPJ</th>
+                          <th><i class="icon_id"></i> CEI</th>
 <!--                           <th><i class="icon_cogs"></i> Ações</th> -->
                        </tr>
                        <tr ng-repeat="e in listaEmpresas | filter: {nome: filtroPesquisa} | orderBy:'+nome'" title="{{e.endereco}}" ng-if="e.ativo">
                            <td>{{e.nome | uppercase}}</td>
                            <td>{{e.cnpj | cnpj}}</td>
+                           <td>{{e.cei | cei}}</td>
 <!--                            <td> -->
 <!--                             <div class="btn-group"> -->
 <!--                                 <button class="btn btn-danger" ng-click="deletar(e.id)" title="Deletar Empresa"> -->

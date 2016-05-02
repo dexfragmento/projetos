@@ -1,15 +1,15 @@
 /**
  * @author Filipe Gomes
  */
-app.filter('cnpj', function () {
+app.filter('cei', function () {
 	return function (input) {
 		
 		if(input !== undefined && input != null) {
-			var _getCnpj = function(str) {								
+			var _getCei = function(str) {								
 				return str.replace(regexSomenteNumero, '');
 			};
 
-			var _formatarCnpj = function(int) {
+			var _formatarCei = function(int) {
 				var tmp = int+'';
 		        
 		        if(tmp.length > 2) {
@@ -20,18 +20,14 @@ app.filter('cnpj', function () {
 		        	tmp = tmp.substring(0, 6) + "." + tmp.substring(6);
 		        }
 		        
-		        if(tmp.length > 10) {
-		        	tmp = tmp.substring(0, 10) + "/" + tmp.substring(10);
-		        }
-		        
-		        if(tmp.length > 15) {
-		        	tmp = tmp.substring(0, 15) + "-" + tmp.substring(15, 17);
+		        if(tmp.length > 12) {
+		        	tmp = tmp.substring(0, 12) + "/" + tmp.substring(12, 14);
 		        }
 		        
 		        return tmp;
 			};
 			
-			input = _formatarCnpj(_getCnpj(input));
+			input = _formatarCei(_getCei(input));
 		}
 		
 		return input;

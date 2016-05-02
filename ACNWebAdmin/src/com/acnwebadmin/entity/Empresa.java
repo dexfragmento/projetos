@@ -22,16 +22,16 @@ public class Empresa {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-   @Column(name = "CNPJ")
+   @Column(name = "CNPJ", nullable = false)
    private String cnpj;
 
    /**
     * Cadastro Específico do INSS
     */
-   @Column(name = "CEI")
+   @Column(name = "CEI", nullable = false)
    private String cei;
 
-	@Column(name = "NOME")
+   @Column(name = "NOME", nullable = false)
 	private String nome;
 	
 	@Column(name = "ENDERECO")

@@ -4,7 +4,7 @@
 app.filter('cpf', function () {
 	return function (input) {
 		
-		if(input !== undefined) {
+		if(input !== undefined && input != null) {
 			var _getCpf = function(str) {								
 				return str.replace(regexSomenteNumero, '');
 			};
