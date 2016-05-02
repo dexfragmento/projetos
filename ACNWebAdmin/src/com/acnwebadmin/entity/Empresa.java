@@ -25,6 +25,12 @@ public class Empresa {
    @Column(name = "CNPJ")
    private String cnpj;
 
+   /**
+    * Cadastro Específico do INSS
+    */
+   @Column(name = "CEI")
+   private String cei;
+
 	@Column(name = "NOME")
 	private String nome;
 	
@@ -75,5 +81,15 @@ public class Empresa {
    {
 		this.cnpj = cnpj;
 	}
+
+   public String getCei()
+   {
+      return cei;
+   }
+
+   public void setCei(String cei)
+   {
+      this.cei = cei;
+   }
 
 }

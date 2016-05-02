@@ -120,12 +120,13 @@
     <script src="app/cargo/directives/modalCadastroCargo.js"></script>
     <script src="app/empresa/controllers/CadastroEmpresaController.js"></script>
     <script src="app/empresa/directives/modalCadastroEmpresa.js"></script>
+    <script src="app/login/directives/login.js"></script>
         
   </head>
 
-  <body ng-app="app" ng-controller="AppController">
-    <div template-private-dir>
-    	<!--custome script for all page-->
+  <body ng-class="{'login-img3-body' : isLogin}" ng-app="app" ng-controller="AppController">
+    <div login ng-if="isLogin"></div>
+    <div template-private-dir ng-if="!isLogin">
     	<script src="js/scripts.js"></script>
     	<div class="se-pre-con" ng-if="loading"></div>
     	<div ng-view></div>
