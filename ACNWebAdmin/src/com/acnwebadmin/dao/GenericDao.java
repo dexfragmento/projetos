@@ -4,6 +4,7 @@ package com.acnwebadmin.dao;
 import com.acnwebadmin.service.InterfaceGenericDao;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.EntityManager;
 
 /**
@@ -181,6 +182,39 @@ public abstract class GenericDao<PK extends Serializable, T> extends DAO impleme
    {
       condicao = (condicao == null ? Boolean.TRUE : condicao);
       return em.createQuery("Select t from " + clazz.getSimpleName() + " t where t.ativo = " + condicao).getResultList();
+   }
+
+   /**
+    * retorna registro por entitdade
+    * 
+    * @param t
+    * @return
+    */
+   public T findByEntity(final T t)
+   {
+      return em.find(clazz, t);
+   }
+
+   /**
+    * retorna registro por atributos
+    * 
+    * @param attrs
+    * @param t
+    * @return
+    */
+   public T getByAttr(final Map<String, Object> attrs, final T t)
+   {
+      return em.find(clazz, t, attrs);
+   }
+
+   /**
+    * retorna EntityManager
+    * 
+    * @return EntityManager
+    */
+   public EntityManager em()
+   {
+      return this.em;
    }
 
 }

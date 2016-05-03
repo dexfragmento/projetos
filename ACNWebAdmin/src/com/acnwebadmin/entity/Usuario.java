@@ -1,14 +1,15 @@
 package com.acnwebadmin.entity;
 
-import java.util.List;
-
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,24 +19,41 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "USUARIO", schema = "ACN")
-public class Usuario {
+@NamedQueries({
+   @NamedQuery(name = "Usuario.FindByLogin", query = "select Object(u) from Usuario u where u.login = :paramLogin"),
+   @NamedQuery(name = "Usuario.Login", query = "select object(u) from Usuario u where u.login = :paramLogin and u.senha = :paramSenha")
+})
+public class Usuario implements Serializable
+{
 
-	@Id
+   public static final String PARAM_LOGIN = "paramLogin";
+   public static final String PARAM_SENHA = "paramSenha";
+
+   /** serialVersionUID */
+   private static final long serialVersionUID = -4718079626730911424L;
+
+   @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "login", length = 20, nullable = false, unique = true)
+   @Column(name = "NOME")
+   private String nome;
+
+   @Column(name = "EMAIL")
+   private String email;
+
+   @Column(name = "LOGIN", length = 20, nullable = false, unique = true)
 	private String login;
 
-	@Column(name = "senha", length = 20, nullable = false)
+   @Column(name = "SENHA", nullable = false)
 	private String senha;
 
 	@Column(name = "ATIVO", nullable = false, columnDefinition = "Boolean default true")
 	private Boolean ativo;
 
-	@ManyToMany
-	@JoinColumn(name = "ID_PERFIL", nullable = false)
-	private List<Perfil> perfis;
+   @OneToOne
+   @JoinColumn(name = "ID_PERFIL", nullable = false)
+   private Perfil perfil;
 
 	public String getLogin() {
 		return login;
@@ -69,12 +87,34 @@ public class Usuario {
 		this.ativo = ativo;
 	}
 
-	public List<Perfil> getPerfis() {
-		return perfis;
+   public Perfil getPerfil()
+   {
+      return perfil;
 	}
 
-	public void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
+   public void setPerfil(Perfil perfil)
+   {
+      this.perfil = perfil;
 	}
+
+   public String getNome()
+   {
+      return nome;
+   }
+
+   public void setNome(String nome)
+   {
+      this.nome = nome;
+   }
+
+   public String getEmail()
+   {
+      return email;
+   }
+
+   public void setEmail(String email)
+   {
+      this.email = email;
+   }
 
 }

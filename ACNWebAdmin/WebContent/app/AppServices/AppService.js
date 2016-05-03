@@ -29,12 +29,17 @@ app.factory('AppService', function($http) {
 		return $http.delete(restUrl + url + '/' + id);
 	};
 	
+	function _autenticar (obj) {
+		return $http.post(restUrl + '/login/', obj);
+	};
+	
 	service.consultarTudo = _consultarTudo;
 	service.consultarPorId = _consultarPorId;
 	service.consultarPorFiltro = _consultarPorFiltro;
 	service.salvar = _salvar;
 	service.atualizar = _atualizar;
 	service.deletar = _deletar;
+	service.autenticar = _autenticar;
 	
 	return service;
 });

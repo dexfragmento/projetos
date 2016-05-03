@@ -1,8 +1,11 @@
 package com.acnwebadmin.dao;
 
 import com.acnwebadmin.entity.Usuario;
-import com.acnwebadmin.util.MD5Decoder;
+import com.acnwebadmin.exceptions.LoginExistenteException;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 /**
  * 
@@ -29,11 +32,16 @@ public class UsuarioDao extends GenericDao<Long, Usuario>
     * @throws SecurityException
     * @throws Exception
     */
-	public void salvar(final String login, final String senha) throws SecurityException, Exception {		
-		final Usuario usuario = new Usuario();
-		usuario.setLogin(login);
-      usuario.setSenha(new MD5Decoder().encode(senha));
-      super.salvar(usuario);
+   public Usuario salvarUsuario(final Usuario usuario) throws LoginExistenteException
+   {
+      if (getByLogin(usuario.getLogin()) == null)
+      {
+         return salvar(usuario);
+      }
+      else
+      {
+         throw new LoginExistenteException("Login existente.");
+      }
 	}
 	
    /**
@@ -45,5 +53,46 @@ public class UsuarioDao extends GenericDao<Long, Usuario>
    {
       return super.findAllActivated(Boolean.TRUE);
 	}
+
+   /**
+    * retorna se existe login
+    * 
+    * @param login
+    * @return
+    */
+   private Usuario getByLogin(final String login)
+   {
+      Usuario retorno = null;
+      try
+      {
+         final EntityManager em = super.em();
+         final Query query = em.createNamedQuery("Usuario.FindByLogin");
+         query.setParameter("paramLogin", login);
+         retorno = (Usuario) query.getSingleResult();
+      }
+      catch (NoResultException nre)
+      {
+         return null;
+      }
+      return retorno;
+   }
+
+   public Usuario login(final String login, final String senha) throws Exception
+   {
+      Usuario retorno = null;
+      try
+      {
+         final EntityManager em = super.em();
+         final Query query = em.createNamedQuery("Usuario.Login");
+         query.setParameter(Usuario.PARAM_LOGIN, login);
+         query.setParameter(Usuario.PARAM_SENHA, senha);
+         retorno = (Usuario) query.getSingleResult();
+      }
+      catch (NoResultException e)
+      {
+         throw new Exception("Falha ao logar no sistema.");
+      }
+      return retorno;
+   }
 
 }
