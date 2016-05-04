@@ -2,7 +2,7 @@
 	<div class="col-lg-12">
 		<h3 class="page-header"><i class="icon_clipboard"></i> <strong>Cadastro de Cargos e Funções</strong></h3>
 		<ol class="breadcrumb">
-			<li><i class="fa fa-home"></i><a href="#/dashboard">Home</a></li>
+			<li><i class="fa fa-home"></i><a href="#/ZGFzaGJvYXJk">Home</a></li>
 			<li><i class="icon_floppy"></i>Cadastros</li>
 			<li><i class="icon_clipboard"></i>Cargos e Funções</li>						  	
 		</ol>
@@ -62,7 +62,7 @@
                             <button class="btn btn-default" 
                                     type="button"
                                     ng-click="limpar()"><i class="fa fa-eraser"></i>&nbsp;Limpar</button>
-                            <a href="#/dashboard" class="btn btn-danger" type="button"><i class="fa fa-minus-square"></i>&nbsp;Cancelar</a>
+                            <a href="#/ZGFzaGJvYXJk" class="btn btn-danger" type="button"><i class="fa fa-minus-square"></i>&nbsp;Cancelar</a>
                         </div>                     
                     </div>
 				</form>
@@ -89,11 +89,10 @@
                           <th><i class="icon_currency"></i> Salário Fixo</th>
                           <th><i class="icon_cogs"></i> Ações</th>
                        </tr>
-                       <tr ng-repeat="c in listaCargos | filter: {nome: filtroPesquisa} | orderBy: '+nome'" 
-                           title="{{c.descricao}}" 
+                       <!-- <tr ng-repeat="c in listaCargos | filter: {nome: filtroPesquisa} | orderBy: '+nome'"
                            ng-if="c.ativo"
-                           data-toggle="modal" data-target="#infoCargo" data-backdrop="true"
-                           ng-click="carregarInfoModal(c)">
+                           data-toggle="modal" data-target="#infoCargo" data-backdrop="static" data-keyboard="false"
+                           ng-click="carregarInfoModal(c)" style="cursor: pointer;" title="Clique para ver as informações detalhadas">
 			               <td>{{c.nome | uppercase}}</td>
 			               <td>{{c.salarioFixo | currency}}</td>
 			               <td>
@@ -103,6 +102,19 @@
                                 </button>
                             </div>
 			               </td>
+                       </tr> -->
+                       <tr ng-repeat="c in listaCargos | filter: {nome: filtroPesquisa} | orderBy: '+nome'"
+                           title="{{c.descricao}}"
+                           ng-if="c.ativo">
+                           <td>{{c.nome | uppercase}}</td>
+                           <td>{{c.salarioFixo | currency}}</td>
+                           <td>
+                            <div class="btn-group">
+                                <button class="btn btn-danger" ng-click="deletar(c.id)" title="Deletar Cargo">
+                                    <i class="icon_close_alt2"></i>
+                                </button>
+                            </div>
+                           </td>
                        </tr>
                    </tbody>
                </table>

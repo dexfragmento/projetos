@@ -104,7 +104,6 @@
     <script src="app/AppDirectives/mascaraTelefone.js"></script>
     <script src="app/AppDirectives/utilMd5.js"></script>
     <script src="app/AppDirectives/modalInfo.js"></script>
-    <script src="app/AppDirectives/autofill.js"></script>
     <script src="app/AppFilters/filtroCnpj.js"></script>
     <script src="app/AppFilters/filtroCei.js"></script>
     <script src="app/AppFilters/filtroCpf.js"></script>
@@ -135,11 +134,12 @@
   </head>
 
   <body ng-class="{'login-img3-body' : isLogin}" ng-app="app" ng-controller="AppController">
-    <div login ng-if="isLogin"></div>
-    <div template-private-dir ng-if="!isLogin">
-    	<script src="js/scripts.js"></script>
-    	<div class="se-pre-con" ng-if="loading"></div>
-    	<div ng-view></div>
-    </div>    
-  </body>
+<!--     <body class="login-img3-body" ng-app="app" ng-controller="AppController"> -->
+	    <div login ng-if="isLogin"></div>
+	    <div template-private-dir ng-if="!isLogin">
+	    	<script src="js/scripts.js"></script>
+	    	<div class="se-pre-con" ng-if="loading"></div>
+	    	<div ng-view></div>
+	    </div>    
+    </body>
 </html>

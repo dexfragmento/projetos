@@ -35,7 +35,10 @@ app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', function (AppS
 			};
 			
 			$scope.limpar = function () {
-				$scope.dto = {};
+				$scope.dto = {
+						login: null,
+						senha: null
+				};
 			};
 			
 			function initController () {
