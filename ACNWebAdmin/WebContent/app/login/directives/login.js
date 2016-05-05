@@ -6,6 +6,7 @@ app.directive('login', [function () {
 		restrict: 'EA',
 		priority: 1,
 		terminal: true,
-		templateUrl: 'app/login/views/login.html'
+		templateUrl: 'app/login/views/login.html',
+		transclude: true
 	}
 }]);

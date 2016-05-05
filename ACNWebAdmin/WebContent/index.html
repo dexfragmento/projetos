@@ -108,6 +108,7 @@
     <script src="app/AppFilters/filtroCei.js"></script>
     <script src="app/AppFilters/filtroCpf.js"></script>
     <script src="app/AppFilters/filtroTelefone.js"></script>
+    <script src="app/AppDirectives/mensagem.js"></script>
     
     <!-- dependências dos módulos do sistema -->
     <script src="app/dashboard/controllers/DashboardController.js"></script>
@@ -133,9 +134,14 @@
         
   </head>
 
-  <body ng-class="{'login-img3-body' : isLogin}" ng-app="app" ng-controller="AppController">
-<!--     <body class="login-img3-body" ng-app="app" ng-controller="AppController"> -->
-	    <div login ng-if="isLogin"></div>
+<!--   <body ng-class="{'login-img3-body' : isLogin}" ng-app="app" ng-controller="AppController"> -->
+    <body class="login-img3-body" ng-app="app" ng-controller="AppController">
+    
+	    <mensagem type="type" title="title" msg="msg" ng-if="exibeMsg"></mensagem>
+		
+	    <div login ng-if="isLogin">
+	       <div class="se-pre-con" ng-if="loading"></div>
+	    </div>
 	    <div template-private-dir ng-if="!isLogin">
 	    	<script src="js/scripts.js"></script>
 	    	<div class="se-pre-con" ng-if="loading"></div>

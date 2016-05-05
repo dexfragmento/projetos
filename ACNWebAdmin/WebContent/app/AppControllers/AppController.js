@@ -1,9 +1,8 @@
 /**
 * @author Filipe Gomes
 **/
-
-app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppService', 'md5', '$base64', '$location', '$cookieStore',
-                                 function($rootScope, $scope, LoginService, AppService, md5, $base64, $location, $cookieStore){	
+app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppService', 'md5', '$base64', '$location', '$cookieStore', '$timeout',
+                                 function($rootScope, $scope, LoginService, AppService, md5, $base64, $location, $cookieStore, $timeout){	
 	$scope.$on('load', function () {
 		$scope.loading = true;
 	});
@@ -12,12 +11,15 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 		$scope.loading = false;
 	});
 	
-	$scope.$on('login', function () {
-		$scope.isLogin = false;
-	});
-	
-	$scope.$on('logout', function () {
-		$scope.isLogin = true;
+	$scope.$on('msg', function (event, param) {
+		$scope.exibeMsg = true;
+		$scope.type = param.type;
+		$scope.title = param.title;
+		$scope.msg = param.msg;
+		
+		$timeout(function() {
+	        $scope.exibeMsg = false;
+	    }, 5000);
 	});
 	
 	$scope.logout = function () {
@@ -29,12 +31,13 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 	
 	function initController () {
 		$rootScope.globals = $cookieStore.get('globals') || {};
-		if (!$rootScope.globals) {			
+		if (!$rootScope.globals) {
 			$scope.isLogin = true;
 		} else if(!$rootScope.globals.usuarioLogado){
 			$scope.isLogin = true;
 		} else {
 			$scope.isLogin = false;
+			$scope.usuarioLogado = $rootScope.globals.usuarioLogado.nome;
 		}
 	};
 	
@@ -53,6 +56,7 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 					LoginService.setCredenciais(res.data.nome, res.data.login, res.data.senha);
 					$location.path('/');
 					$scope.isLogin = false;
+					$scope.usuarioLogado = res.data.nome;
 					$scope.$emit('unload');
 				},
 				function (err) {
@@ -61,6 +65,7 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 					obj.senha = null;
 					LoginService.limparCredenciais();
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: 'ATENÇÃO!', msg: err.data.message});
 				});
 	};
 }]);

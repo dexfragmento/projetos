@@ -21,10 +21,12 @@ app.controller('CadastroEmpresaController', ['$scope', 'AppService', function($s
 					$scope.limpar();
 					console.info('Registro salvo!');
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'success', title: '', msg: 'Registro salvo com sucesso.'});
 				},
 				function (err) {
 					console.error(err);
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao salvar registro.'});
 				});
 	};
 	
@@ -36,9 +38,11 @@ app.controller('CadastroEmpresaController', ['$scope', 'AppService', function($s
 				$scope.listaEmpresas = res.data;
 				console.info('Registro deletado!');
 				$scope.$emit('unload');
+				$scope.$emit('msg', {type: 'success', title: '', msg: 'Registro deletado com sucesso.'});
 			}, function(err) {
 				console.error(err);
 				$scope.$emit('unload');
+				$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao deletar registro.'});
 			});
 		}				
 	};
@@ -59,6 +63,7 @@ app.controller('CadastroEmpresaController', ['$scope', 'AppService', function($s
 				function (err) {
 					console.error(err);
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao carregar empresas.'});
 				});
 	};
 	

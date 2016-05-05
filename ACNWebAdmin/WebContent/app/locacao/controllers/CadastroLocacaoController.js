@@ -20,10 +20,12 @@ app.controller('CadastroLocacaoController', ['$scope', 'AppService', function($s
 						   console.info('Registro salvo!');
 						   $scope.limpar();
 						   $scope.$emit('unload');
+						   $scope.$emit('msg', {type: 'success', title: '', msg: 'Registro salvo com sucesso.'});
 					   },
 					   function (err) {
 						   console.error(err);
 						   $scope.$emit('unload');
+						   $scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao salvar registro.'});
 					   });
 	};
 	
@@ -36,10 +38,12 @@ app.controller('CadastroLocacaoController', ['$scope', 'AppService', function($s
 							   $scope.listaLocacoes = res.data;
 							   console.info('Registro deletado!');
 							   $scope.$emit('unload');
+							   $scope.$emit('msg', {type: 'success', title: '', msg: 'Registro deletado com sucesso.'});
 						   },
 						   function (err) {
 							   console.error(err);
 							   $scope.$emit('unload');
+							   $scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao deletar registro.'});
 						   });
 		}
 	};
@@ -68,6 +72,7 @@ app.controller('CadastroLocacaoController', ['$scope', 'AppService', function($s
 				function (err) {
 					console.error(err);
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao carregar locações.'});
 				});
 	};
 	
@@ -82,6 +87,7 @@ app.controller('CadastroLocacaoController', ['$scope', 'AppService', function($s
 				function (err) {
 					console.error(err);
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao carregar empresas.'});
 				});
 	};
 }]);

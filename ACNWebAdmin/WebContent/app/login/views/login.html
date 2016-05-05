@@ -1,18 +1,8 @@
-
 <div class="container">
-
+    <div ng-transclude></div>
   <form name="loginForm" role="form" class="login-form" ng-submit="login(dto)">
     <div class="login-wrap">
-<!--         <p class="login-img"><i class="icon_lock_alt"></i></p> -->
         <p class="login-img"><img src="img/logomarca.jpg" width="130px" style="padding:1px; border:1px solid #021a40;"></p>
-<!--         <div class="input-group"> -->
-<!--           <span class="input-group-addon"><i class="icon_profile"></i></span> -->
-<!--           <input type="text" class="form-control" placeholder="Login" ng-model="dto.login" autofocus ng-required="true"> -->
-<!--         </div> -->
-<!--         <div class="input-group"> -->
-<!--             <span class="input-group-addon"><i class="icon_key_alt"></i></span> -->
-<!--             <input type="password" class="form-control" placeholder="Senha" ng-model="dto.senha" ng-required="true"> -->
-<!--         </div> -->
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -22,26 +12,20 @@
                        placeholder="Digite o login do usuário"
                        ng-model="dto.login"
                        required>
-            </div>       
+            </div>
         </div>
-        <div class="form-group">                    
+        <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                <input id="senha" 
-                       type="password" 
-                       class="form-control" 
+                <input id="senha"
+                       type="password"
+                       class="form-control"
                        placeholder="Digite a senha do usuário"
                        ng-model="dto.senha"
                        required>
-            </div>                              
+            </div>
         </div>
-<!--         <label class="checkbox"> -->
-<!--             <input type="checkbox" value="lembrar"> Lembrar -->
-<!--             <span class="pull-right"> <a href="#"> Esqueceu a senha?</a></span> -->
-<!--         </label> -->
-        <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="!loginForm.$valid">Entrar</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Entrar</button>
 	  </div>
 	</form>
-
 </div>
-

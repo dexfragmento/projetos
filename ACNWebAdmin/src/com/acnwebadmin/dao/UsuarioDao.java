@@ -43,6 +43,16 @@ public class UsuarioDao extends GenericDao<Long, Usuario>
          throw new LoginExistenteException("Login existente.");
       }
 	}
+
+   /**
+    * @TODO Comentar Método
+    * @param usuario
+    * @return
+    */
+   public Usuario atualizarUsuario(final Usuario usuario)
+   {
+      return atualizar(usuario);
+   }
 	
    /**
     * retornar todos os registros ativados
@@ -51,7 +61,7 @@ public class UsuarioDao extends GenericDao<Long, Usuario>
     */
    public List<Usuario> getUsuarios()
    {
-      return super.findAllActivated(Boolean.TRUE);
+      return super.findAll();
 	}
 
    /**

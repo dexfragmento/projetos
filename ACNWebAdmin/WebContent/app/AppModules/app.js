@@ -16,6 +16,5 @@ function run ($rootScope, $location, $cookieStore) {
 		if (!logado) {
 			$location.path('/login');
 		}
-		
 	});
 };

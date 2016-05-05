@@ -29,7 +29,9 @@ app.controller('CadastroFuncionarioController', ['$scope', 'AppService', '$filte
 	};
 	
 	$scope.limpar = function () {
-		$scope.dto = {};
+		$scope.dto = {
+				telefone: null
+		};
 	};
 	
 	$scope.selecionarCargoSalarioFixo = function () {

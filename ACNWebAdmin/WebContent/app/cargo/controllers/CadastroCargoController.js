@@ -22,9 +22,11 @@ app.controller('CadastroCargoController', [ '$scope', 'AppService', '$filter',
 					$scope.listaCargos.push(res.data);
 					$scope.limpar();
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'success', title: 'OK!', msg: 'Registro salvo com sucesso.'});
 				}, function(err) {
 					console.error(err);
 					$scope.$emit('unload');
+					$scope.$emit('msg', {type: 'danger', title: 'ERRO!', msg: 'Falha ao salvar registro.'});
 				});
 			};
 
@@ -40,9 +42,11 @@ app.controller('CadastroCargoController', [ '$scope', 'AppService', '$filter',
 					service.then(function(res) {
 						$scope.listaCargos = res.data;
 						$scope.$emit('unload');
+						$scope.$emit('msg', {type: 'success', title: 'OK!', msg: 'Registro deletado com sucesso.'});
 					}, function(err) {
 						console.error(err);
 						$scope.$emit('unload');
+						$scope.$emit('msg', {type: 'danger', title: 'ERRO!', msg: 'Falha ao deletar registro.'});
 					});
 				}				
 			};
@@ -82,6 +86,7 @@ app.controller('CadastroCargoController', [ '$scope', 'AppService', '$filter',
 				 	})
 				 	.error(function (err) {
 				 		console.error(err);
+				 		$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao carregar cargos.'});
 				 	});
 			};
 		} ]);

@@ -12,3 +12,12 @@ if it's not present, don't show loader */
 	z-index: 9999;
 	background: url(../img/loading6.gif) center no-repeat;
 }
+
+.config-msg {
+	position: fixed;
+	right: 5px;
+	top: 60px;
+	width: auto;
+	height: auto;
+	z-index: 9999;
+}
