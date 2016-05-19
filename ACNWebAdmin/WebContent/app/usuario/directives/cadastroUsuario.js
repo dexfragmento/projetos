@@ -1,7 +1,8 @@
 /**
  * @author Filipe Gomes
  */
-app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', function (AppService, md5, $base64, $rootScope) {
+app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', 'LoginService', '$window',
+                                  function (AppService, md5, $base64, $rootScope, LoginService, $window) {
 	return {
 		restrict: 'EA',
 		templateUrl: 'app/usuario/views/cadastroUsuarioView.html',
@@ -10,13 +11,17 @@ app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', 
 			$scope.dto = {};
 			$scope.listaPerfis = [];
 			$scope.listaUsuarios = [];
-			$scope.modalConfirmacaoId = "modalConfirmacao";
+			$scope.modalConfirmacaoId = 'modalConfirmacao';
+			$scope.tituloModalConfirmacao = 'Confirmar';
+			$scope.conteudoTituloModalConfirmacao = 'Tentativa de desativação do usuário atualmente logado.';
+			$scope.conteudoCorpoModalConfirmacao = 'Se continuar, você será automaticamente desativado e deslogado do sistema.';
 			
 			initController();
 			
 			$scope.salvar = function () {
 				$scope.$emit('load');
 				$scope.dto.ativo = true;
+				$scope.dto.login = $scope.dto.login.toLowerCase();
 				$scope.dto.senha = $base64.encode(md5.createHash($scope.dto.senha));
 				
 				service.salvar('/usuario', $scope.dto)
@@ -27,6 +32,7 @@ app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', 
 								} else {									
 									$scope.limpar();
 									$scope.$emit('msg', {type: 'success', title: '', msg: 'Registro salvo com sucesso.'});
+									$scope.listaUsuarios.push(res.data);
 								}								
 								$scope.$emit('unload');
 							},
@@ -51,18 +57,14 @@ app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', 
 					 * Código para abrir modal de confiramção
 					 */
 					$(document).ready(function(){
-						$("#btnInativar").click(function(){
-					        $("#modalConfirmacao").modal("show");
-					    });
-					    
-						$("#myModal").on('show.bs.modal', function () {
-//				            alert('The modal is about to be shown.');
-					    });
+						$("#modalConfirmacao").modal("show");
 					});
+				} else {
+					$scope.alterarAtivacaoEffective(obj, false);
 				}
 			};
 			
-			$scope.alterarAtivacaoEffective = function (obj) {
+			$scope.alterarAtivacaoEffective = function (obj, isUsuarioLogado) {
 				$scope.$emit('load');
 				obj.ativo = !obj.ativo;				
 				service.atualizar('/usuario', obj)
@@ -71,11 +73,22 @@ app.directive('cadastroUsuario', ['AppService', 'md5', '$base64', '$rootScope', 
 								obj = res.data;
 								$scope.$emit('unload');
 								$scope.$emit('msg', {type: 'success', title: '', msg: 'Ativação alterada com sucesso.'});
+								if (isUsuarioLogado) {
+									$(document).ready(function(){
+										$("#modalConfirmacao").modal("hide");
+									});
+									LoginService.limparCredenciais();
+									$window.location.reload();
+								}								
 							},
 							function (err) {
 								console.error(err);
 								$scope.$emit('unload');
 								$scope.$emit('msg', {type: 'danger', title: '', msg: 'Falha ao alterar ativação do registro.'});
+								$(document).ready(function(){
+									$("#modalConfirmacao").modal("hide");
+								});
+								obj.ativo = !obj.ativo;
 							});
 			};
 			

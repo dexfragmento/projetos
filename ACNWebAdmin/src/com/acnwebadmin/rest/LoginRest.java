@@ -33,7 +33,7 @@ public class LoginRest
       try{
          return Response.ok(dao.login(dto.getLogin(), dto.getSenha())).build();
       }catch(Exception e){
-         return Response.status(500).entity(new Exception("Falha na autenticação.")).build();
+         return Response.status(500).entity(e).build();
       }
    }
 

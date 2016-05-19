@@ -8,12 +8,13 @@ LoginService.$inject = ['$http', '$rootScope', '$cookieStore'];
 function LoginService ($http, $rootScope, $cookieStore) {
 	var service = {};
 	
-	function setCredenciais (nome, login, senha) {
+	function setCredenciais (nome, login, senha, perfil) {
 		$rootScope.globals = {
 				usuarioLogado: {
 					nome: nome,
                     login: login,
-                    senha: senha
+                    senha: senha,
+                    perfil: perfil
                 }
             };
 		

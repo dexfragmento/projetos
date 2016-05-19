@@ -37,10 +37,11 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 			$scope.isLogin = true;
 		} else {
 			$scope.isLogin = false;
-			$scope.usuarioLogado = $rootScope.globals.usuarioLogado.nome;
+			$scope.usuarioLogado = $rootScope.globals.usuarioLogado;
+			$scope.perfilUsuarioLogado = $scope.usuarioLogado.perfil.nome.toUpperCase();
 		}
 	};
-	
+		
 	$scope.login = function (obj) {
 		$scope.$emit('load');
 		
@@ -53,10 +54,11 @@ app.controller('AppController', ['$rootScope', '$scope', 'LoginService', 'AppSer
 		
 		service.then(
 				function (res) {
-					LoginService.setCredenciais(res.data.nome, res.data.login, res.data.senha);
+					LoginService.setCredenciais(res.data.nome, res.data.login, res.data.senha, res.data.perfil);
 					$location.path('/');
 					$scope.isLogin = false;
-					$scope.usuarioLogado = res.data.nome;
+					$scope.usuarioLogado = res.data;
+					$scope.perfilUsuarioLogado = $scope.usuarioLogado.perfil.nome.toUpperCase();
 					$scope.$emit('unload');
 				},
 				function (err) {

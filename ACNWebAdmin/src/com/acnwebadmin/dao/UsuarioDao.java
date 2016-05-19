@@ -97,10 +97,16 @@ public class UsuarioDao extends GenericDao<Long, Usuario>
          query.setParameter(Usuario.PARAM_LOGIN, login);
          query.setParameter(Usuario.PARAM_SENHA, senha);
          retorno = (Usuario) query.getSingleResult();
+         
+         if(retorno != null) {
+        	 if(!retorno.getAtivo()) {
+        		 throw new Exception("O usuário \"" + retorno.getLogin().toUpperCase() + "\" foi desativado pelo Administrador do sistema.");
+        	 }
+         }         
       }
       catch (NoResultException e)
       {
-         throw new Exception("Falha ao logar no sistema.");
+         throw new Exception("Login e/ou Senha inválido(s).");
       }
       return retorno;
    }
