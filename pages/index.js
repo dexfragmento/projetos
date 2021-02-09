@@ -5,14 +5,19 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Olá Marilene</title>
+        <title>Olá, Marilene</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Olá Marilene!
+          Olá, Marilene!
         </h1>
+        <p>
+          <small>
+            Projeto teste para estudos de NextJS, ReactJS e Material UI          
+          </small>
+        </p>
       </main>
 
       <footer className={styles.footer}>
