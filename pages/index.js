@@ -14,6 +14,9 @@ export default function Home() {
           Olá, Marilene!
         </h1>
         <p>
+          <img src="/ola-marilene.jpeg" height="200" width="200"/>
+        </p>
+        <p>
           <small>
             Projeto teste para estudos de NextJS, ReactJS e Material UI          
           </small>
@@ -21,7 +24,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-          Filipe Gomes 2021
+        Filipe Gomes 2021
       </footer>
     </div>
   )
