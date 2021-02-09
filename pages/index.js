@@ -18,7 +18,7 @@ export default function Home() {
         </p>
         <p>
           <small>
-            Projeto teste para estudos de NextJS, ReactJS e Material UI          
+            Estudo e prototipação de projetos NextJS, ReactJS e Material UI          
           </small>
         </p>
       </main>
